@@ -26,6 +26,6 @@ repositories {
 }
 
 dependencies {
-    compile 'org.gosu-lang.gosu:gosu-core-api:1-ant-SNAPSHOT'
+    compile 'org.gosu-lang.gosu:gosu-core-api:1-spec-SNAPSHOT'
     testCompile group: 'junit', name: 'junit', version: '4.11'
 }
