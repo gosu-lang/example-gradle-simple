@@ -11,7 +11,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'org.gosu-lang.gosu:gradle-gosu-plugin:0.1.2-alpha-SNAPSHOT'
+        classpath 'org.gosu-lang.gosu:gradle-gosu-plugin:0.1.3-alpha-SNAPSHOT'
     }
 }
 apply plugin: 'org.gosu-lang.gosu'
