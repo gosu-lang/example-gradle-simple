@@ -1,4 +1,4 @@
-# example-gradle
+# example-gradle-simple
 Example usage of the Gosu plugin for Gradle
 
 ## Build configuration
@@ -6,6 +6,9 @@ There are some noticeable differences between usage of the plugin compared to a 
   1. The Gosu plugin must be explicitly applied, but it will automatically apply the Java plugin
   2. A compile dependency on `org.gosu-lang.gosu:gosu-core-api` must be specified
   3. `compileGosu` and `compileTestGosu` tasks are automatically added to the build
+
+**Important note:** Although this example compiles Java sources (if present) followed by Gosu sources, 
+Gosu compilation will fail if Java classes in the same module are referenced.  Additional build configuration is required.
 
 ## Usage/Outcome
 Executing `$ ./gradlew clean test` should produce the following output:
