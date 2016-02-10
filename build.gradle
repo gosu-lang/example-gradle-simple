@@ -61,7 +61,7 @@ tasks.withType(org.gosulang.gradle.tasks.compile.GosuCompile.class) {
 //        listFiles = true //TODO nice-to-have
 //        fork = true //TODO disambiguate with useAnt
         forkOptions.with { //these options dictate the worker process's JVM
-            jvmArgs += '-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=5005'
+            jvmArgs += '-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=5006'
             memoryMaximumSize = '456M'
         }
     }
