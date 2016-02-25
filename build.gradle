@@ -4,19 +4,22 @@ import java.nio.charset.StandardCharsets
 //    id 'org.gosu-lang.gosu' version '0.1.2-alpha-SNAPSHOT'
 //}
 
-buildscript {
-    repositories {
-        mavenLocal()
-        maven {
-            url 'https://oss.sonatype.org/content/repositories/snapshots/' //for Gosu snapshot builds
-        }
-        jcenter()
-    }
-    dependencies {
-        classpath 'org.gosu-lang.gosu:gradle-gosu-plugin:0.1.4-SNAPSHOT'
-    }
-}
-apply plugin: 'org.gosu-lang.gosu'
+//buildscript {
+//    repositories {
+//        mavenLocal()
+//        maven {
+//            url 'https://oss.sonatype.org/content/repositories/snapshots/' //for Gosu snapshot builds
+//        }
+//        jcenter()
+//    }
+//    dependencies {
+//        classpath 'org.gosu-lang.gosu:gradle-gosu-plugin:0.1.4-simple-gosuc-SNAPSHOT'
+//    }
+//}
+apply plugin: 'gosu'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
 repositories {
     mavenLocal()
@@ -28,11 +31,14 @@ repositories {
 }
 
 dependencies {
-    compile 'org.gosu-lang.gosu:gosu-core-api:1.11'
+    compile 'org.gosu-lang.gosu:gosu-core-api:1.12.1'
+//    compile 'org.gosu-lang.gosu:gosu-core:1.12.1'
+//    runtime 'org.gosu-lang.gosu:gosu-core:1.12.1'
+    compile 'com.google.guava:guava:19.0'
     testCompile group: 'junit', name: 'junit', version: '4.11'
 }
 
-System.setProperty('sun.io.serialization.extendedDebugInfo', 'true')
+//System.setProperty('sun.io.serialization.extendedDebugInfo', 'true')
 
 configurations.all {
     // check for updates every build
@@ -40,7 +46,7 @@ configurations.all {
     resolutionStrategy.cacheDynamicVersionsFor 0, 'seconds'
 }
 
-tasks.withType(org.gosulang.gradle.tasks.compile.GosuCompile.class) {
+tasks.withType(GosuCompile) {
 /*
     options.with {
         bootClasspath = '/Users/kmoore/.m2/repository/org/gosu-lang/gosu/gradle-gosu-plugin/0.1.4-SNAPSHOT/gradle-gosu-plugin-0.1.4-SNAPSHOT.jar'
@@ -54,18 +60,31 @@ tasks.withType(org.gosulang.gradle.tasks.compile.GosuCompile.class) {
     }
 */
 //    options.forkOptions.jvmArgs += 'poopy'
+//gosuCompile {
     gosuCompileOptions.with {
         useAnt = false
+        fork = true
 //        bootClasspath = '/Users/kmoore/.m2/repository/org/gosu-lang/gosu/gradle-gosu-plugin/0.1.4-SNAPSHOT/gradle-gosu-plugin-0.1.4-SNAPSHOT.jar'
 //        encoding = StandardCharsets.UTF_8 //FIXME does not exist in Gosu, but should it?
 //        listFiles = true //TODO nice-to-have
 //        fork = true //TODO disambiguate with useAnt
         forkOptions.with { //these options dictate the worker process's JVM
-            jvmArgs += '-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=5006'
+//            jvmArgs += '-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=5006'
             memoryMaximumSize = '456M'
         }
     }
 }
+
+/**
+ * See https://docs.oracle.com/javase/tutorial/ext/basics/install.html
+ * @return the Gosu plugin's JAR appended to the existing java.ext.dirs property 
+ */
+//String appendPluginToJavaExtDirs() {
+//    String originalValue = System.getProperty('java.ext.dirs')
+//    AppliedPlugin plugin = project.getPluginManager().findPlugin('org.gosu-lang.gosu')
+//    return '-Djava.ext.dirs='.concat(originalValue).concat(File.pathSeparator).concat('/home/kmoore/.m2/repository/org/gosu-lang/gosu/gradle-gosu-plugin/0.1.4-SNAPSHOT') //FIXME make it programmatic
+//    
+//}
 
 /*
 22:38:58.149 [DEBUG] [org.gosulang.gradle.tasks.compile.NormalizingGosuCompiler] Compiler arguments: poopy -d /Users/kmoore/dev/gosu-lang/example-gradle-simple/build/classes/main -g -sourcepath /Users/kmoore/dev/gosu-lang/example-gradle-simple/emptySourcePathRef -classpath /Users/kmoore/.gradle/caches/modules-2/files-2.1/org.gosu-lang.gosu/gosu-core-api/1.11/e7d1dae06ac9ab73aa8dafdba9de55a2142552f1/gosu-core-api-1.11.jar:/Users/kmoore/.m2/repository/org/gosu-lang/gosu/managed/gw-asm-all/5.0.4/gw-asm-all-5.0.4.jar:/Users/kmoore/dev/gosu-lang/example-gradle-simple/build/classes/main:/Users/kmoore/.gradle/caches/modules-2/files-2.1/org.gosu-lang.gosu/gosu-ant-tools/1.11/180c93ba7fac4443070d39574ee3af3f0c2ad2c3/gosu-ant-tools-1.11.jar:/Users/kmoore/.gradle/caches/modules-2/files-2.1/org.gosu-lang.gosu/gosu-core/1.11/84326c37bfb15d3bf1c23e7ff63b5d3645a60e72/gosu-core-1.11.jar:/Users/kmoore/.gradle/caches/modules-2/files-2.1/org.gosu-lang.gosu/gosu-doc/1.11/9995c40cab7d248a614d0e6eb2372e74d94948df/gosu-doc-1.11.jar /Users/kmoore/dev/gosu-lang/example-gradle-simple/src/main/gosu/example/Foo.gs /Users/kmoore/dev/gosu-lang/example-gradle-simple/src/main/gosu/example/FooEnhancement.gsx -XDuseUnsharedTable=true
