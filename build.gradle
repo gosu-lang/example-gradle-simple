@@ -21,3 +21,7 @@ dependencies {
     compile 'org.gosu-lang.gosu:gosu-core-api:1.13.5'
     testCompile 'junit:junit:4.11'
 }
+
+compileGosu {
+    gosuCompileOptions.useAnt = false // fork!
+}
