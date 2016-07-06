@@ -8,6 +8,6 @@ repositories {
 }
 
 dependencies {
-    compile 'org.gosu-lang.gosu:gosu-core-api:1.13.4'
+    compile 'org.gosu-lang.gosu:gosu-core-api:1.13.6'
     testCompile 'junit:junit:4.11'
 }
