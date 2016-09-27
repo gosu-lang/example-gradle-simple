@@ -13,7 +13,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'org.gosu-lang.gosu:gradle-gosu-plugin:0.1.4-SNAPSHOT'
+        classpath 'org.gosu-lang.gosu:gradle-gosu-plugin:0.2.0-SNAPSHOT'
     }
 }
 apply plugin: 'org.gosu-lang.gosu'
@@ -28,7 +28,7 @@ repositories {
 }
 
 dependencies {
-    compile 'org.gosu-lang.gosu:gosu-core-api:1.11'
+    compile 'org.gosu-lang.gosu:gosu-core-api:1.13.9'
     testCompile group: 'junit', name: 'junit', version: '4.11'
 }
 
@@ -41,36 +41,11 @@ configurations.all {
 }
 
 tasks.withType(org.gosulang.gradle.tasks.compile.GosuCompile.class) {
-/*
-    options.with {
-        bootClasspath = '/Users/kmoore/.m2/repository/org/gosu-lang/gosu/gradle-gosu-plugin/0.1.4-SNAPSHOT/gradle-gosu-plugin-0.1.4-SNAPSHOT.jar'
-        encoding = StandardCharsets.UTF_8
-        listFiles = true
-        fork = true
-        forkOptions.with {
-            jvmArgs += 'poopy'
-            memoryMaximumSize = '456M'
-        }
-    }
-*/
-//    options.forkOptions.jvmArgs += 'poopy'
-    gosuCompileOptions.with {
-        useAnt = false
-//        bootClasspath = '/Users/kmoore/.m2/repository/org/gosu-lang/gosu/gradle-gosu-plugin/0.1.4-SNAPSHOT/gradle-gosu-plugin-0.1.4-SNAPSHOT.jar'
-//        encoding = StandardCharsets.UTF_8 //FIXME does not exist in Gosu, but should it?
-//        listFiles = true //TODO nice-to-have
-//        fork = true //TODO disambiguate with useAnt
-        forkOptions.with { //these options dictate the worker process's JVM
-            jvmArgs += '-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=5006'
-            memoryMaximumSize = '456M'
-        }
-    }
+//    gosuCompileOptions.with {
+//        forkOptions.with { //these options dictate the worker process's JVM
+//            jvmArgs += '-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=5006'
+//            memoryMaximumSize = '456M'
+//        }
+//    }
 }
 
-/*
-22:38:58.149 [DEBUG] [org.gosulang.gradle.tasks.compile.NormalizingGosuCompiler] Compiler arguments: poopy -d /Users/kmoore/dev/gosu-lang/example-gradle-simple/build/classes/main -g -sourcepath /Users/kmoore/dev/gosu-lang/example-gradle-simple/emptySourcePathRef -classpath /Users/kmoore/.gradle/caches/modules-2/files-2.1/org.gosu-lang.gosu/gosu-core-api/1.11/e7d1dae06ac9ab73aa8dafdba9de55a2142552f1/gosu-core-api-1.11.jar:/Users/kmoore/.m2/repository/org/gosu-lang/gosu/managed/gw-asm-all/5.0.4/gw-asm-all-5.0.4.jar:/Users/kmoore/dev/gosu-lang/example-gradle-simple/build/classes/main:/Users/kmoore/.gradle/caches/modules-2/files-2.1/org.gosu-lang.gosu/gosu-ant-tools/1.11/180c93ba7fac4443070d39574ee3af3f0c2ad2c3/gosu-ant-tools-1.11.jar:/Users/kmoore/.gradle/caches/modules-2/files-2.1/org.gosu-lang.gosu/gosu-core/1.11/84326c37bfb15d3bf1c23e7ff63b5d3645a60e72/gosu-core-1.11.jar:/Users/kmoore/.gradle/caches/modules-2/files-2.1/org.gosu-lang.gosu/gosu-doc/1.11/9995c40cab7d248a614d0e6eb2372e74d94948df/gosu-doc-1.11.jar /Users/kmoore/dev/gosu-lang/example-gradle-simple/src/main/gosu/example/Foo.gs /Users/kmoore/dev/gosu-lang/example-gradle-simple/src/main/gosu/example/FooEnhancement.gsx -XDuseUnsharedTable=true
- */
-
-/*
-09:52:12.478 [INFO] [org.gradle.process.internal.DefaultExecHandle] Starting process 'Gradle Compiler Daemon 1'. Working directory: /Users/kmoore/dev/gosu-lang/example-gradle-simple Command: /Library/Java/JavaVirtualMachines/jdk1.8.0_60.jdk/Contents/Home/bin/java -Djava.security.manager=jarjar.org.gradle.process.internal.child.BootstrapSecurityManager poopy -Xmx456M -Dfile.encoding=UTF-8 -Duser.country=US -Duser.language=en -Duser.variant -cp /Users/kmoore/.gradle/caches/2.9/workerMain/gradle-worker.jar jarjar.org.gradle.process.internal.launcher.GradleWorkerMain 'Gradle Compiler Daemon 1'
-*/
