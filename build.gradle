@@ -1,5 +1,5 @@
 plugins {
-    id 'org.gosu-lang.gosu' version '0.2.0'
+    id 'org.gosu-lang.gosu' version '0.2.2'
 }
 
 repositories {
@@ -8,6 +8,6 @@ repositories {
 }
 
 dependencies {
-    compile 'org.gosu-lang.gosu:gosu-core-api:1.13.9'
-    testCompile 'junit:junit:4.11'
+    compile 'org.gosu-lang.gosu:gosu-core-api:1.14.3'
+    testCompile 'junit:junit:4.12'
 }
