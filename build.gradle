@@ -9,5 +9,7 @@ repositories {
 
 dependencies {
     compile 'org.gosu-lang.gosu:gosu-core-api:1.13.14'
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.8.8.1'
+    compile 'org.apache.servicemix.specs:org.apache.servicemix.specs.jsr311-api-1.1:2.8.0'
     testCompile 'junit:junit:4.12'
 }
