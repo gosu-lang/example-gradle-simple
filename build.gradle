@@ -8,7 +8,7 @@ repositories {
 }
 
 dependencies {
-    compile 'org.gosu-lang.gosu:gosu-core-api:1.13.14'
+    compile 'org.gosu-lang.gosu:gosu-core-api:1.14.6'
     compile 'io.swagger:swagger-jersey2-jaxrs:1.5.13'
     testCompile 'junit:junit:4.12'
 }
